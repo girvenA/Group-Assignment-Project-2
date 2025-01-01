@@ -60,11 +60,12 @@ def p_expression_binop(p):
                   | expression MOD expression
                   | expression CONCAT expression'''
     if p[2] == '+':
-        p[0] = p[1] + p[3]
+        # p[0] = p[1] + p[3]
+        p[0] = str(p[1]) + str(p[3])
     elif p[2] == '/':
-        p[0] = p[1] / p[3]
+        p[0] = str(p[1]) / str(p[3])
     elif p[2] == '%':
-        p[0] = p[1] % p[3]
+        p[0] = str(p[1]) % str(p[3])
     elif p[2] == '.':
         p[0] = str(p[1]) + str(p[3])  # Concatenate two strings
 
