@@ -70,8 +70,7 @@ def p_expression_number(p):
     p[0] = p[1]
 
 def p_expression_id(p):
-    '''expression : IDENTIFIER
-                  | VAR'''
+    '''expression : VAR'''
     var_name = p[1][1:] if p[1].startswith('$') else p[1]  # Remove '$' from VAR tokens
     p[0] = ('var', var_name)
 

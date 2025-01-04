@@ -23,9 +23,8 @@ Rule 17    expression -> expression NOTEQUAL expression
 Rule 18    expression -> expression CONCAT expression
 Rule 19    expression -> LPAREN expression RPAREN
 Rule 20    expression -> NUMBER
-Rule 21    expression -> IDENTIFIER
-Rule 22    expression -> VAR
-Rule 23    expression -> STRING
+Rule 21    expression -> VAR
+Rule 22    expression -> STRING
 
 Terminals, with rules where they appear
 
@@ -35,7 +34,6 @@ ECHO                 : 6 7
 ELSE                 : 9
 EQUALS               : 8
 GREATERTHAN          : 16
-IDENTIFIER           : 21
 IF                   : 9 11
 LCURLY               : 9 9 10 11
 LESSEQUAL            : 15
@@ -50,8 +48,8 @@ PRINT                : 4 5
 RCURLY               : 9 9 10 11
 RPAREN               : 9 10 11 19
 SEMI                 : 4 6 8
-STRING               : 23
-VAR                  : 8 22
+STRING               : 22
+VAR                  : 8 21
 WHILE                : 10
 error                : 
 
@@ -148,15 +146,13 @@ state 5
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
     expression                     shift and go to state 12
 
@@ -173,23 +169,21 @@ state 6
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
-    expression                     shift and go to state 18
+    expression                     shift and go to state 17
 
 state 7
 
     (8) statement -> VAR . EQUALS expression SEMI
 
-    EQUALS          shift and go to state 19
+    EQUALS          shift and go to state 18
 
 
 state 8
@@ -197,14 +191,14 @@ state 8
     (9) statement -> IF . LPAREN expression RPAREN LCURLY statements RCURLY ELSE LCURLY statements RCURLY
     (11) statement -> IF . LPAREN expression RPAREN LCURLY statements RCURLY
 
-    LPAREN          shift and go to state 20
+    LPAREN          shift and go to state 19
 
 
 state 9
 
     (10) statement -> WHILE . LPAREN expression RPAREN LCURLY statements RCURLY
 
-    LPAREN          shift and go to state 21
+    LPAREN          shift and go to state 20
 
 
 state 10
@@ -234,7 +228,7 @@ state 12
     (17) expression -> expression . NOTEQUAL expression
     (18) expression -> expression . CONCAT expression
 
-    SEMI            shift and go to state 22
+    SEMI            shift and go to state 21
     PRINT           reduce using rule 5 (statement -> PRINT expression .)
     ECHO            reduce using rule 5 (statement -> PRINT expression .)
     VAR             reduce using rule 5 (statement -> PRINT expression .)
@@ -242,13 +236,13 @@ state 12
     WHILE           reduce using rule 5 (statement -> PRINT expression .)
     PHP_CLOSE       reduce using rule 5 (statement -> PRINT expression .)
     RCURLY          reduce using rule 5 (statement -> PRINT expression .)
-    PLUS            shift and go to state 23
-    DIVIDE          shift and go to state 24
-    MOD             shift and go to state 25
-    LESSEQUAL       shift and go to state 26
-    GREATERTHAN     shift and go to state 27
-    NOTEQUAL        shift and go to state 28
-    CONCAT          shift and go to state 29
+    PLUS            shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MOD             shift and go to state 24
+    LESSEQUAL       shift and go to state 25
+    GREATERTHAN     shift and go to state 26
+    NOTEQUAL        shift and go to state 27
+    CONCAT          shift and go to state 28
 
 
 state 13
@@ -263,17 +257,15 @@ state 13
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
-    expression                     shift and go to state 30
+    expression                     shift and go to state 29
 
 state 14
 
@@ -299,71 +291,49 @@ state 14
 
 state 15
 
-    (21) expression -> IDENTIFIER .
+    (21) expression -> VAR .
 
-    SEMI            reduce using rule 21 (expression -> IDENTIFIER .)
-    PLUS            reduce using rule 21 (expression -> IDENTIFIER .)
-    DIVIDE          reduce using rule 21 (expression -> IDENTIFIER .)
-    MOD             reduce using rule 21 (expression -> IDENTIFIER .)
-    LESSEQUAL       reduce using rule 21 (expression -> IDENTIFIER .)
-    GREATERTHAN     reduce using rule 21 (expression -> IDENTIFIER .)
-    NOTEQUAL        reduce using rule 21 (expression -> IDENTIFIER .)
-    CONCAT          reduce using rule 21 (expression -> IDENTIFIER .)
-    PRINT           reduce using rule 21 (expression -> IDENTIFIER .)
-    ECHO            reduce using rule 21 (expression -> IDENTIFIER .)
-    VAR             reduce using rule 21 (expression -> IDENTIFIER .)
-    IF              reduce using rule 21 (expression -> IDENTIFIER .)
-    WHILE           reduce using rule 21 (expression -> IDENTIFIER .)
-    PHP_CLOSE       reduce using rule 21 (expression -> IDENTIFIER .)
-    RCURLY          reduce using rule 21 (expression -> IDENTIFIER .)
-    RPAREN          reduce using rule 21 (expression -> IDENTIFIER .)
+    SEMI            reduce using rule 21 (expression -> VAR .)
+    PLUS            reduce using rule 21 (expression -> VAR .)
+    DIVIDE          reduce using rule 21 (expression -> VAR .)
+    MOD             reduce using rule 21 (expression -> VAR .)
+    LESSEQUAL       reduce using rule 21 (expression -> VAR .)
+    GREATERTHAN     reduce using rule 21 (expression -> VAR .)
+    NOTEQUAL        reduce using rule 21 (expression -> VAR .)
+    CONCAT          reduce using rule 21 (expression -> VAR .)
+    PRINT           reduce using rule 21 (expression -> VAR .)
+    ECHO            reduce using rule 21 (expression -> VAR .)
+    VAR             reduce using rule 21 (expression -> VAR .)
+    IF              reduce using rule 21 (expression -> VAR .)
+    WHILE           reduce using rule 21 (expression -> VAR .)
+    PHP_CLOSE       reduce using rule 21 (expression -> VAR .)
+    RCURLY          reduce using rule 21 (expression -> VAR .)
+    RPAREN          reduce using rule 21 (expression -> VAR .)
 
 
 state 16
 
-    (22) expression -> VAR .
+    (22) expression -> STRING .
 
-    SEMI            reduce using rule 22 (expression -> VAR .)
-    PLUS            reduce using rule 22 (expression -> VAR .)
-    DIVIDE          reduce using rule 22 (expression -> VAR .)
-    MOD             reduce using rule 22 (expression -> VAR .)
-    LESSEQUAL       reduce using rule 22 (expression -> VAR .)
-    GREATERTHAN     reduce using rule 22 (expression -> VAR .)
-    NOTEQUAL        reduce using rule 22 (expression -> VAR .)
-    CONCAT          reduce using rule 22 (expression -> VAR .)
-    PRINT           reduce using rule 22 (expression -> VAR .)
-    ECHO            reduce using rule 22 (expression -> VAR .)
-    VAR             reduce using rule 22 (expression -> VAR .)
-    IF              reduce using rule 22 (expression -> VAR .)
-    WHILE           reduce using rule 22 (expression -> VAR .)
-    PHP_CLOSE       reduce using rule 22 (expression -> VAR .)
-    RCURLY          reduce using rule 22 (expression -> VAR .)
-    RPAREN          reduce using rule 22 (expression -> VAR .)
+    SEMI            reduce using rule 22 (expression -> STRING .)
+    PLUS            reduce using rule 22 (expression -> STRING .)
+    DIVIDE          reduce using rule 22 (expression -> STRING .)
+    MOD             reduce using rule 22 (expression -> STRING .)
+    LESSEQUAL       reduce using rule 22 (expression -> STRING .)
+    GREATERTHAN     reduce using rule 22 (expression -> STRING .)
+    NOTEQUAL        reduce using rule 22 (expression -> STRING .)
+    CONCAT          reduce using rule 22 (expression -> STRING .)
+    PRINT           reduce using rule 22 (expression -> STRING .)
+    ECHO            reduce using rule 22 (expression -> STRING .)
+    VAR             reduce using rule 22 (expression -> STRING .)
+    IF              reduce using rule 22 (expression -> STRING .)
+    WHILE           reduce using rule 22 (expression -> STRING .)
+    PHP_CLOSE       reduce using rule 22 (expression -> STRING .)
+    RCURLY          reduce using rule 22 (expression -> STRING .)
+    RPAREN          reduce using rule 22 (expression -> STRING .)
 
 
 state 17
-
-    (23) expression -> STRING .
-
-    SEMI            reduce using rule 23 (expression -> STRING .)
-    PLUS            reduce using rule 23 (expression -> STRING .)
-    DIVIDE          reduce using rule 23 (expression -> STRING .)
-    MOD             reduce using rule 23 (expression -> STRING .)
-    LESSEQUAL       reduce using rule 23 (expression -> STRING .)
-    GREATERTHAN     reduce using rule 23 (expression -> STRING .)
-    NOTEQUAL        reduce using rule 23 (expression -> STRING .)
-    CONCAT          reduce using rule 23 (expression -> STRING .)
-    PRINT           reduce using rule 23 (expression -> STRING .)
-    ECHO            reduce using rule 23 (expression -> STRING .)
-    VAR             reduce using rule 23 (expression -> STRING .)
-    IF              reduce using rule 23 (expression -> STRING .)
-    WHILE           reduce using rule 23 (expression -> STRING .)
-    PHP_CLOSE       reduce using rule 23 (expression -> STRING .)
-    RCURLY          reduce using rule 23 (expression -> STRING .)
-    RPAREN          reduce using rule 23 (expression -> STRING .)
-
-
-state 18
 
     (6) statement -> ECHO expression . SEMI
     (7) statement -> ECHO expression .
@@ -375,7 +345,7 @@ state 18
     (17) expression -> expression . NOTEQUAL expression
     (18) expression -> expression . CONCAT expression
 
-    SEMI            shift and go to state 31
+    SEMI            shift and go to state 30
     PRINT           reduce using rule 7 (statement -> ECHO expression .)
     ECHO            reduce using rule 7 (statement -> ECHO expression .)
     VAR             reduce using rule 7 (statement -> ECHO expression .)
@@ -383,16 +353,16 @@ state 18
     WHILE           reduce using rule 7 (statement -> ECHO expression .)
     PHP_CLOSE       reduce using rule 7 (statement -> ECHO expression .)
     RCURLY          reduce using rule 7 (statement -> ECHO expression .)
-    PLUS            shift and go to state 23
-    DIVIDE          shift and go to state 24
-    MOD             shift and go to state 25
-    LESSEQUAL       shift and go to state 26
-    GREATERTHAN     shift and go to state 27
-    NOTEQUAL        shift and go to state 28
-    CONCAT          shift and go to state 29
+    PLUS            shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MOD             shift and go to state 24
+    LESSEQUAL       shift and go to state 25
+    GREATERTHAN     shift and go to state 26
+    NOTEQUAL        shift and go to state 27
+    CONCAT          shift and go to state 28
 
 
-state 19
+state 18
 
     (8) statement -> VAR EQUALS . expression SEMI
     (12) expression -> . expression PLUS expression
@@ -404,19 +374,17 @@ state 19
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
-    expression                     shift and go to state 32
+    expression                     shift and go to state 31
 
-state 20
+state 19
 
     (9) statement -> IF LPAREN . expression RPAREN LCURLY statements RCURLY ELSE LCURLY statements RCURLY
     (11) statement -> IF LPAREN . expression RPAREN LCURLY statements RCURLY
@@ -429,19 +397,17 @@ state 20
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
-    expression                     shift and go to state 33
+    expression                     shift and go to state 32
 
-state 21
+state 20
 
     (10) statement -> WHILE LPAREN . expression RPAREN LCURLY statements RCURLY
     (12) expression -> . expression PLUS expression
@@ -453,19 +419,17 @@ state 21
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
-    expression                     shift and go to state 34
+    expression                     shift and go to state 33
 
-state 22
+state 21
 
     (4) statement -> PRINT expression SEMI .
 
@@ -478,7 +442,7 @@ state 22
     RCURLY          reduce using rule 4 (statement -> PRINT expression SEMI .)
 
 
-state 23
+state 22
 
     (12) expression -> expression PLUS . expression
     (12) expression -> . expression PLUS expression
@@ -490,19 +454,17 @@ state 23
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
-    expression                     shift and go to state 35
+    expression                     shift and go to state 34
 
-state 24
+state 23
 
     (13) expression -> expression DIVIDE . expression
     (12) expression -> . expression PLUS expression
@@ -514,19 +476,17 @@ state 24
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
-    expression                     shift and go to state 36
+    expression                     shift and go to state 35
 
-state 25
+state 24
 
     (14) expression -> expression MOD . expression
     (12) expression -> . expression PLUS expression
@@ -538,19 +498,17 @@ state 25
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
-    expression                     shift and go to state 37
+    expression                     shift and go to state 36
 
-state 26
+state 25
 
     (15) expression -> expression LESSEQUAL . expression
     (12) expression -> . expression PLUS expression
@@ -562,19 +520,17 @@ state 26
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
-    expression                     shift and go to state 38
+    expression                     shift and go to state 37
 
-state 27
+state 26
 
     (16) expression -> expression GREATERTHAN . expression
     (12) expression -> . expression PLUS expression
@@ -586,19 +542,17 @@ state 27
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
-    expression                     shift and go to state 39
+    expression                     shift and go to state 38
 
-state 28
+state 27
 
     (17) expression -> expression NOTEQUAL . expression
     (12) expression -> . expression PLUS expression
@@ -610,19 +564,17 @@ state 28
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
-    expression                     shift and go to state 40
+    expression                     shift and go to state 39
 
-state 29
+state 28
 
     (18) expression -> expression CONCAT . expression
     (12) expression -> . expression PLUS expression
@@ -634,19 +586,17 @@ state 29
     (18) expression -> . expression CONCAT expression
     (19) expression -> . LPAREN expression RPAREN
     (20) expression -> . NUMBER
-    (21) expression -> . IDENTIFIER
-    (22) expression -> . VAR
-    (23) expression -> . STRING
+    (21) expression -> . VAR
+    (22) expression -> . STRING
 
     LPAREN          shift and go to state 13
     NUMBER          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    VAR             shift and go to state 16
-    STRING          shift and go to state 17
+    VAR             shift and go to state 15
+    STRING          shift and go to state 16
 
-    expression                     shift and go to state 41
+    expression                     shift and go to state 40
 
-state 30
+state 29
 
     (19) expression -> LPAREN expression . RPAREN
     (12) expression -> expression . PLUS expression
@@ -657,17 +607,17 @@ state 30
     (17) expression -> expression . NOTEQUAL expression
     (18) expression -> expression . CONCAT expression
 
-    RPAREN          shift and go to state 42
-    PLUS            shift and go to state 23
-    DIVIDE          shift and go to state 24
-    MOD             shift and go to state 25
-    LESSEQUAL       shift and go to state 26
-    GREATERTHAN     shift and go to state 27
-    NOTEQUAL        shift and go to state 28
-    CONCAT          shift and go to state 29
+    RPAREN          shift and go to state 41
+    PLUS            shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MOD             shift and go to state 24
+    LESSEQUAL       shift and go to state 25
+    GREATERTHAN     shift and go to state 26
+    NOTEQUAL        shift and go to state 27
+    CONCAT          shift and go to state 28
 
 
-state 31
+state 30
 
     (6) statement -> ECHO expression SEMI .
 
@@ -680,7 +630,7 @@ state 31
     RCURLY          reduce using rule 6 (statement -> ECHO expression SEMI .)
 
 
-state 32
+state 31
 
     (8) statement -> VAR EQUALS expression . SEMI
     (12) expression -> expression . PLUS expression
@@ -691,17 +641,17 @@ state 32
     (17) expression -> expression . NOTEQUAL expression
     (18) expression -> expression . CONCAT expression
 
-    SEMI            shift and go to state 43
-    PLUS            shift and go to state 23
-    DIVIDE          shift and go to state 24
-    MOD             shift and go to state 25
-    LESSEQUAL       shift and go to state 26
-    GREATERTHAN     shift and go to state 27
-    NOTEQUAL        shift and go to state 28
-    CONCAT          shift and go to state 29
+    SEMI            shift and go to state 42
+    PLUS            shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MOD             shift and go to state 24
+    LESSEQUAL       shift and go to state 25
+    GREATERTHAN     shift and go to state 26
+    NOTEQUAL        shift and go to state 27
+    CONCAT          shift and go to state 28
 
 
-state 33
+state 32
 
     (9) statement -> IF LPAREN expression . RPAREN LCURLY statements RCURLY ELSE LCURLY statements RCURLY
     (11) statement -> IF LPAREN expression . RPAREN LCURLY statements RCURLY
@@ -713,17 +663,17 @@ state 33
     (17) expression -> expression . NOTEQUAL expression
     (18) expression -> expression . CONCAT expression
 
-    RPAREN          shift and go to state 44
-    PLUS            shift and go to state 23
-    DIVIDE          shift and go to state 24
-    MOD             shift and go to state 25
-    LESSEQUAL       shift and go to state 26
-    GREATERTHAN     shift and go to state 27
-    NOTEQUAL        shift and go to state 28
-    CONCAT          shift and go to state 29
+    RPAREN          shift and go to state 43
+    PLUS            shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MOD             shift and go to state 24
+    LESSEQUAL       shift and go to state 25
+    GREATERTHAN     shift and go to state 26
+    NOTEQUAL        shift and go to state 27
+    CONCAT          shift and go to state 28
 
 
-state 34
+state 33
 
     (10) statement -> WHILE LPAREN expression . RPAREN LCURLY statements RCURLY
     (12) expression -> expression . PLUS expression
@@ -734,17 +684,17 @@ state 34
     (17) expression -> expression . NOTEQUAL expression
     (18) expression -> expression . CONCAT expression
 
-    RPAREN          shift and go to state 45
-    PLUS            shift and go to state 23
-    DIVIDE          shift and go to state 24
-    MOD             shift and go to state 25
-    LESSEQUAL       shift and go to state 26
-    GREATERTHAN     shift and go to state 27
-    NOTEQUAL        shift and go to state 28
-    CONCAT          shift and go to state 29
+    RPAREN          shift and go to state 44
+    PLUS            shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MOD             shift and go to state 24
+    LESSEQUAL       shift and go to state 25
+    GREATERTHAN     shift and go to state 26
+    NOTEQUAL        shift and go to state 27
+    CONCAT          shift and go to state 28
 
 
-state 35
+state 34
 
     (12) expression -> expression PLUS expression .
     (12) expression -> expression . PLUS expression
@@ -770,18 +720,18 @@ state 35
     PHP_CLOSE       reduce using rule 12 (expression -> expression PLUS expression .)
     RCURLY          reduce using rule 12 (expression -> expression PLUS expression .)
     RPAREN          reduce using rule 12 (expression -> expression PLUS expression .)
-    DIVIDE          shift and go to state 24
+    DIVIDE          shift and go to state 23
 
   ! DIVIDE          [ reduce using rule 12 (expression -> expression PLUS expression .) ]
-  ! PLUS            [ shift and go to state 23 ]
-  ! MOD             [ shift and go to state 25 ]
-  ! LESSEQUAL       [ shift and go to state 26 ]
-  ! GREATERTHAN     [ shift and go to state 27 ]
-  ! NOTEQUAL        [ shift and go to state 28 ]
-  ! CONCAT          [ shift and go to state 29 ]
+  ! PLUS            [ shift and go to state 22 ]
+  ! MOD             [ shift and go to state 24 ]
+  ! LESSEQUAL       [ shift and go to state 25 ]
+  ! GREATERTHAN     [ shift and go to state 26 ]
+  ! NOTEQUAL        [ shift and go to state 27 ]
+  ! CONCAT          [ shift and go to state 28 ]
 
 
-state 36
+state 35
 
     (13) expression -> expression DIVIDE expression .
     (12) expression -> expression . PLUS expression
@@ -809,16 +759,16 @@ state 36
     RCURLY          reduce using rule 13 (expression -> expression DIVIDE expression .)
     RPAREN          reduce using rule 13 (expression -> expression DIVIDE expression .)
 
-  ! PLUS            [ shift and go to state 23 ]
-  ! DIVIDE          [ shift and go to state 24 ]
-  ! MOD             [ shift and go to state 25 ]
-  ! LESSEQUAL       [ shift and go to state 26 ]
-  ! GREATERTHAN     [ shift and go to state 27 ]
-  ! NOTEQUAL        [ shift and go to state 28 ]
-  ! CONCAT          [ shift and go to state 29 ]
+  ! PLUS            [ shift and go to state 22 ]
+  ! DIVIDE          [ shift and go to state 23 ]
+  ! MOD             [ shift and go to state 24 ]
+  ! LESSEQUAL       [ shift and go to state 25 ]
+  ! GREATERTHAN     [ shift and go to state 26 ]
+  ! NOTEQUAL        [ shift and go to state 27 ]
+  ! CONCAT          [ shift and go to state 28 ]
 
 
-state 37
+state 36
 
     (14) expression -> expression MOD expression .
     (12) expression -> expression . PLUS expression
@@ -845,13 +795,13 @@ state 37
     PHP_CLOSE       reduce using rule 14 (expression -> expression MOD expression .)
     RCURLY          reduce using rule 14 (expression -> expression MOD expression .)
     RPAREN          reduce using rule 14 (expression -> expression MOD expression .)
-    PLUS            shift and go to state 23
-    DIVIDE          shift and go to state 24
-    MOD             shift and go to state 25
-    LESSEQUAL       shift and go to state 26
-    GREATERTHAN     shift and go to state 27
-    NOTEQUAL        shift and go to state 28
-    CONCAT          shift and go to state 29
+    PLUS            shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MOD             shift and go to state 24
+    LESSEQUAL       shift and go to state 25
+    GREATERTHAN     shift and go to state 26
+    NOTEQUAL        shift and go to state 27
+    CONCAT          shift and go to state 28
 
   ! PLUS            [ reduce using rule 14 (expression -> expression MOD expression .) ]
   ! DIVIDE          [ reduce using rule 14 (expression -> expression MOD expression .) ]
@@ -862,7 +812,7 @@ state 37
   ! CONCAT          [ reduce using rule 14 (expression -> expression MOD expression .) ]
 
 
-state 38
+state 37
 
     (15) expression -> expression LESSEQUAL expression .
     (12) expression -> expression . PLUS expression
@@ -889,13 +839,13 @@ state 38
     PHP_CLOSE       reduce using rule 15 (expression -> expression LESSEQUAL expression .)
     RCURLY          reduce using rule 15 (expression -> expression LESSEQUAL expression .)
     RPAREN          reduce using rule 15 (expression -> expression LESSEQUAL expression .)
-    PLUS            shift and go to state 23
-    DIVIDE          shift and go to state 24
-    MOD             shift and go to state 25
-    LESSEQUAL       shift and go to state 26
-    GREATERTHAN     shift and go to state 27
-    NOTEQUAL        shift and go to state 28
-    CONCAT          shift and go to state 29
+    PLUS            shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MOD             shift and go to state 24
+    LESSEQUAL       shift and go to state 25
+    GREATERTHAN     shift and go to state 26
+    NOTEQUAL        shift and go to state 27
+    CONCAT          shift and go to state 28
 
   ! PLUS            [ reduce using rule 15 (expression -> expression LESSEQUAL expression .) ]
   ! DIVIDE          [ reduce using rule 15 (expression -> expression LESSEQUAL expression .) ]
@@ -906,7 +856,7 @@ state 38
   ! CONCAT          [ reduce using rule 15 (expression -> expression LESSEQUAL expression .) ]
 
 
-state 39
+state 38
 
     (16) expression -> expression GREATERTHAN expression .
     (12) expression -> expression . PLUS expression
@@ -933,13 +883,13 @@ state 39
     PHP_CLOSE       reduce using rule 16 (expression -> expression GREATERTHAN expression .)
     RCURLY          reduce using rule 16 (expression -> expression GREATERTHAN expression .)
     RPAREN          reduce using rule 16 (expression -> expression GREATERTHAN expression .)
-    PLUS            shift and go to state 23
-    DIVIDE          shift and go to state 24
-    MOD             shift and go to state 25
-    LESSEQUAL       shift and go to state 26
-    GREATERTHAN     shift and go to state 27
-    NOTEQUAL        shift and go to state 28
-    CONCAT          shift and go to state 29
+    PLUS            shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MOD             shift and go to state 24
+    LESSEQUAL       shift and go to state 25
+    GREATERTHAN     shift and go to state 26
+    NOTEQUAL        shift and go to state 27
+    CONCAT          shift and go to state 28
 
   ! PLUS            [ reduce using rule 16 (expression -> expression GREATERTHAN expression .) ]
   ! DIVIDE          [ reduce using rule 16 (expression -> expression GREATERTHAN expression .) ]
@@ -950,7 +900,7 @@ state 39
   ! CONCAT          [ reduce using rule 16 (expression -> expression GREATERTHAN expression .) ]
 
 
-state 40
+state 39
 
     (17) expression -> expression NOTEQUAL expression .
     (12) expression -> expression . PLUS expression
@@ -977,13 +927,13 @@ state 40
     PHP_CLOSE       reduce using rule 17 (expression -> expression NOTEQUAL expression .)
     RCURLY          reduce using rule 17 (expression -> expression NOTEQUAL expression .)
     RPAREN          reduce using rule 17 (expression -> expression NOTEQUAL expression .)
-    PLUS            shift and go to state 23
-    DIVIDE          shift and go to state 24
-    MOD             shift and go to state 25
-    LESSEQUAL       shift and go to state 26
-    GREATERTHAN     shift and go to state 27
-    NOTEQUAL        shift and go to state 28
-    CONCAT          shift and go to state 29
+    PLUS            shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MOD             shift and go to state 24
+    LESSEQUAL       shift and go to state 25
+    GREATERTHAN     shift and go to state 26
+    NOTEQUAL        shift and go to state 27
+    CONCAT          shift and go to state 28
 
   ! PLUS            [ reduce using rule 17 (expression -> expression NOTEQUAL expression .) ]
   ! DIVIDE          [ reduce using rule 17 (expression -> expression NOTEQUAL expression .) ]
@@ -994,7 +944,7 @@ state 40
   ! CONCAT          [ reduce using rule 17 (expression -> expression NOTEQUAL expression .) ]
 
 
-state 41
+state 40
 
     (18) expression -> expression CONCAT expression .
     (12) expression -> expression . PLUS expression
@@ -1021,13 +971,13 @@ state 41
     PHP_CLOSE       reduce using rule 18 (expression -> expression CONCAT expression .)
     RCURLY          reduce using rule 18 (expression -> expression CONCAT expression .)
     RPAREN          reduce using rule 18 (expression -> expression CONCAT expression .)
-    PLUS            shift and go to state 23
-    DIVIDE          shift and go to state 24
-    MOD             shift and go to state 25
-    LESSEQUAL       shift and go to state 26
-    GREATERTHAN     shift and go to state 27
-    NOTEQUAL        shift and go to state 28
-    CONCAT          shift and go to state 29
+    PLUS            shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MOD             shift and go to state 24
+    LESSEQUAL       shift and go to state 25
+    GREATERTHAN     shift and go to state 26
+    NOTEQUAL        shift and go to state 27
+    CONCAT          shift and go to state 28
 
   ! PLUS            [ reduce using rule 18 (expression -> expression CONCAT expression .) ]
   ! DIVIDE          [ reduce using rule 18 (expression -> expression CONCAT expression .) ]
@@ -1038,7 +988,7 @@ state 41
   ! CONCAT          [ reduce using rule 18 (expression -> expression CONCAT expression .) ]
 
 
-state 42
+state 41
 
     (19) expression -> LPAREN expression RPAREN .
 
@@ -1060,7 +1010,7 @@ state 42
     RPAREN          reduce using rule 19 (expression -> LPAREN expression RPAREN .)
 
 
-state 43
+state 42
 
     (8) statement -> VAR EQUALS expression SEMI .
 
@@ -1073,25 +1023,48 @@ state 43
     RCURLY          reduce using rule 8 (statement -> VAR EQUALS expression SEMI .)
 
 
-state 44
+state 43
 
     (9) statement -> IF LPAREN expression RPAREN . LCURLY statements RCURLY ELSE LCURLY statements RCURLY
     (11) statement -> IF LPAREN expression RPAREN . LCURLY statements RCURLY
+
+    LCURLY          shift and go to state 45
+
+
+state 44
+
+    (10) statement -> WHILE LPAREN expression RPAREN . LCURLY statements RCURLY
 
     LCURLY          shift and go to state 46
 
 
 state 45
 
-    (10) statement -> WHILE LPAREN expression RPAREN . LCURLY statements RCURLY
+    (9) statement -> IF LPAREN expression RPAREN LCURLY . statements RCURLY ELSE LCURLY statements RCURLY
+    (11) statement -> IF LPAREN expression RPAREN LCURLY . statements RCURLY
+    (2) statements -> . statement statements
+    (3) statements -> . statement
+    (4) statement -> . PRINT expression SEMI
+    (5) statement -> . PRINT expression
+    (6) statement -> . ECHO expression SEMI
+    (7) statement -> . ECHO expression
+    (8) statement -> . VAR EQUALS expression SEMI
+    (9) statement -> . IF LPAREN expression RPAREN LCURLY statements RCURLY ELSE LCURLY statements RCURLY
+    (10) statement -> . WHILE LPAREN expression RPAREN LCURLY statements RCURLY
+    (11) statement -> . IF LPAREN expression RPAREN LCURLY statements RCURLY
 
-    LCURLY          shift and go to state 47
+    PRINT           shift and go to state 5
+    ECHO            shift and go to state 6
+    VAR             shift and go to state 7
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
 
+    statements                     shift and go to state 47
+    statement                      shift and go to state 4
 
 state 46
 
-    (9) statement -> IF LPAREN expression RPAREN LCURLY . statements RCURLY ELSE LCURLY statements RCURLY
-    (11) statement -> IF LPAREN expression RPAREN LCURLY . statements RCURLY
+    (10) statement -> WHILE LPAREN expression RPAREN LCURLY . statements RCURLY
     (2) statements -> . statement statements
     (3) statements -> . statement
     (4) statement -> . PRINT expression SEMI
@@ -1114,48 +1087,25 @@ state 46
 
 state 47
 
-    (10) statement -> WHILE LPAREN expression RPAREN LCURLY . statements RCURLY
-    (2) statements -> . statement statements
-    (3) statements -> . statement
-    (4) statement -> . PRINT expression SEMI
-    (5) statement -> . PRINT expression
-    (6) statement -> . ECHO expression SEMI
-    (7) statement -> . ECHO expression
-    (8) statement -> . VAR EQUALS expression SEMI
-    (9) statement -> . IF LPAREN expression RPAREN LCURLY statements RCURLY ELSE LCURLY statements RCURLY
-    (10) statement -> . WHILE LPAREN expression RPAREN LCURLY statements RCURLY
-    (11) statement -> . IF LPAREN expression RPAREN LCURLY statements RCURLY
+    (9) statement -> IF LPAREN expression RPAREN LCURLY statements . RCURLY ELSE LCURLY statements RCURLY
+    (11) statement -> IF LPAREN expression RPAREN LCURLY statements . RCURLY
 
-    PRINT           shift and go to state 5
-    ECHO            shift and go to state 6
-    VAR             shift and go to state 7
-    IF              shift and go to state 8
-    WHILE           shift and go to state 9
+    RCURLY          shift and go to state 49
 
-    statements                     shift and go to state 49
-    statement                      shift and go to state 4
 
 state 48
 
-    (9) statement -> IF LPAREN expression RPAREN LCURLY statements . RCURLY ELSE LCURLY statements RCURLY
-    (11) statement -> IF LPAREN expression RPAREN LCURLY statements . RCURLY
+    (10) statement -> WHILE LPAREN expression RPAREN LCURLY statements . RCURLY
 
     RCURLY          shift and go to state 50
 
 
 state 49
 
-    (10) statement -> WHILE LPAREN expression RPAREN LCURLY statements . RCURLY
-
-    RCURLY          shift and go to state 51
-
-
-state 50
-
     (9) statement -> IF LPAREN expression RPAREN LCURLY statements RCURLY . ELSE LCURLY statements RCURLY
     (11) statement -> IF LPAREN expression RPAREN LCURLY statements RCURLY .
 
-    ELSE            shift and go to state 52
+    ELSE            shift and go to state 51
     PRINT           reduce using rule 11 (statement -> IF LPAREN expression RPAREN LCURLY statements RCURLY .)
     ECHO            reduce using rule 11 (statement -> IF LPAREN expression RPAREN LCURLY statements RCURLY .)
     VAR             reduce using rule 11 (statement -> IF LPAREN expression RPAREN LCURLY statements RCURLY .)
@@ -1165,7 +1115,7 @@ state 50
     RCURLY          reduce using rule 11 (statement -> IF LPAREN expression RPAREN LCURLY statements RCURLY .)
 
 
-state 51
+state 50
 
     (10) statement -> WHILE LPAREN expression RPAREN LCURLY statements RCURLY .
 
@@ -1178,14 +1128,14 @@ state 51
     RCURLY          reduce using rule 10 (statement -> WHILE LPAREN expression RPAREN LCURLY statements RCURLY .)
 
 
-state 52
+state 51
 
     (9) statement -> IF LPAREN expression RPAREN LCURLY statements RCURLY ELSE . LCURLY statements RCURLY
 
-    LCURLY          shift and go to state 53
+    LCURLY          shift and go to state 52
 
 
-state 53
+state 52
 
     (9) statement -> IF LPAREN expression RPAREN LCURLY statements RCURLY ELSE LCURLY . statements RCURLY
     (2) statements -> . statement statements
@@ -1205,17 +1155,17 @@ state 53
     IF              shift and go to state 8
     WHILE           shift and go to state 9
 
-    statements                     shift and go to state 54
+    statements                     shift and go to state 53
     statement                      shift and go to state 4
 
-state 54
+state 53
 
     (9) statement -> IF LPAREN expression RPAREN LCURLY statements RCURLY ELSE LCURLY statements . RCURLY
 
-    RCURLY          shift and go to state 55
+    RCURLY          shift and go to state 54
 
 
-state 55
+state 54
 
     (9) statement -> IF LPAREN expression RPAREN LCURLY statements RCURLY ELSE LCURLY statements RCURLY .
 
@@ -1230,6 +1180,13 @@ state 55
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 36 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 36 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 36 resolved as shift
+WARNING: shift/reduce conflict for LESSEQUAL in state 36 resolved as shift
+WARNING: shift/reduce conflict for GREATERTHAN in state 36 resolved as shift
+WARNING: shift/reduce conflict for NOTEQUAL in state 36 resolved as shift
+WARNING: shift/reduce conflict for CONCAT in state 36 resolved as shift
 WARNING: shift/reduce conflict for PLUS in state 37 resolved as shift
 WARNING: shift/reduce conflict for DIVIDE in state 37 resolved as shift
 WARNING: shift/reduce conflict for MOD in state 37 resolved as shift
@@ -1258,10 +1215,3 @@ WARNING: shift/reduce conflict for LESSEQUAL in state 40 resolved as shift
 WARNING: shift/reduce conflict for GREATERTHAN in state 40 resolved as shift
 WARNING: shift/reduce conflict for NOTEQUAL in state 40 resolved as shift
 WARNING: shift/reduce conflict for CONCAT in state 40 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 41 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 41 resolved as shift
-WARNING: shift/reduce conflict for MOD in state 41 resolved as shift
-WARNING: shift/reduce conflict for LESSEQUAL in state 41 resolved as shift
-WARNING: shift/reduce conflict for GREATERTHAN in state 41 resolved as shift
-WARNING: shift/reduce conflict for NOTEQUAL in state 41 resolved as shift
-WARNING: shift/reduce conflict for CONCAT in state 41 resolved as shift

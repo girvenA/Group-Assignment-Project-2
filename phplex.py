@@ -35,8 +35,7 @@ tokens = keywords + [
     'NOTEQUAL',
     'CONCAT', 
     'SEMI',  
-    'MOD',
-    'IDENTIFIER', 
+    'MOD', 
     'NUMBER', 
     'STRING',
     'VAR'
@@ -52,10 +51,10 @@ t_PHP_CLOSE = r'\?>'
 t_ignore_COMMENT =r'//.*'
 
 # Token definitions
-def t_IDENTIFER(t):
+def t_KEYWORD(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     t.value = t.value.lower()  # Convert to lowercase
-    t.type = reserved.get(t.value, 'IDENTIFIER')  # Check against reserved keywords
+    t.type = reserved.get(t.value, 'KEYWORD')  # Check against reserved keywords
     return t
 
 def t_VAR(t):
