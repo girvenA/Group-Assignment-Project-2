@@ -33,23 +33,20 @@ tokens = keywords + [
     'VAR'
 ]
 
-# Ignore whitespace
 t_ignore = ' \t'
 
 t_PHP_OPEN = r'<\?php|<\?'
 t_PHP_CLOSE = r'\?>'
 
-# Ignore comment
 t_ignore_COMMENT =r'//.*'
 
-# Token definitions
 def t_KEYWORD(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     if t.value.upper() in keywords:
         t.type = t.value.upper()
     return t
 def t_VAR(t):
-    r'\$[a-zA-Z_][a-zA-Z0-9_]*'  # Identifiers start with $ followed by letters or numbers
+    r'\$[a-zA-Z_][a-zA-Z0-9_]*'  
     t.value = t.value[1:]
     return t
 
@@ -69,10 +66,10 @@ t_LCURLY = r'\{'
 t_RCURLY = r'\}'
 t_LESSEQUAL = r'\<='
 t_GREATERTHAN = r'\>'
-t_CONCAT = r'\.'  # Concatenation operator
+t_CONCAT = r'\.'  
 t_SEMI = r'\;'
-t_NOTEQUAL = r'\!='  # Not operator
-t_MOD = r'\%'  # Modulo operator
+t_NOTEQUAL = r'\!='  
+t_MOD = r'\%'  
 
 def t_NEWLINE(t):
     r'\n'
@@ -82,14 +79,5 @@ def t_error(t):
     print(f"Illegal character '{t.value[0]}' at line {t.lineno}")
     t.lexer.skip(1)
 
-# Build the lexer
 lex.lex(debug=0)
 
-# # Function to analyze input code
-# def analyze_code(code):
-#     lex.input(code)
-#     while True:
-#         token = lex.token()  # Get the next token
-#         if not token:  # If there are no more tokens, break
-#             break
-#         print(token)

@@ -19,8 +19,6 @@ class Interpreter:
                     left = float(left) if '.' in left else int(left)
                 if isinstance(right, str) and right.replace('.', '', 1).isdigit():
                     right = float(right) if '.' in right else int(right)
-                    
-                #operation of binop
                 if op == '+':
                     return left + right
                 elif op == '/':
@@ -34,7 +32,7 @@ class Interpreter:
                     return left <= right
                 elif op == '!=':
                     return left != right
-                elif op == '.':  # String concatenation
+                elif op == '.':
                     return str(left) + str(right)
 
             elif node[0] == 'number':
@@ -52,25 +50,24 @@ class Interpreter:
                 else:
                     raise ValueError(f"Undefined variable '{var_name}'")
             elif node[0] == 'print':
-                value = self.eval(node[1])  # Evaluate the expression
-                print(value, end='')  # Print the value
-                return value  # Return the value
+                value = self.eval(node[1]) 
+                print(value, end='')  
+                return value 
             elif node[0] == 'echo':
                 value = self.eval(node[1])
-                print(value, end='')  # Print without a newline for echo
+                print(value, end='') 
                 return value
             
-            elif node[0] == 'ifelse':  # Handling if-else
+            elif node[0] == 'ifelse': 
                 condition = self.eval(node[1])
                 if condition:
                     # Execute the 'if' block if the condition is true
                     for statement in node[2]:
                         self.eval(statement)
                 else:
-                    # Otherwise execute the 'else' block
                     for statement in node[3]:
                         self.eval(statement)
-            elif node[0] == 'if':  # Handling if without else
+            elif node[0] == 'if': 
                 condition = self.eval(node[1])
                 if condition:
                     for statement in node[2]:

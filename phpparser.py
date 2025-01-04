@@ -3,13 +3,12 @@ import phplex
 
 tokens = phplex.tokens
 
-# Precedence rules for the parser
 precedence = (
     ('left', 'PLUS'),
     ('left', 'DIVIDE'),
 )
 
-# Grammar rules for the parser
+# Grammar rules
 def p_program(p):
     '''program : PHP_OPEN statements PHP_CLOSE'''
     p[0] = ('program', p[2])
@@ -84,7 +83,6 @@ def p_error(p):
     else:
         print("Syntax error at EOF")
 
-# Function to evaluate conditions
 def eval_condition(condition):
     if isinstance(condition, tuple):
         left = condition[0]
@@ -96,6 +94,5 @@ def eval_condition(condition):
             return left <= right
     return False
 
-# Build the parser
 parser = yacc.yacc()
 
