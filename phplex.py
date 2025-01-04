@@ -11,14 +11,6 @@ keywords = [
     'WHILE',
 ]
 
-reserved = {
-    'echo': 'ECHO',
-    'print': 'PRINT',
-    'if': 'IF',
-    'else': 'ELSE',
-    'while': 'WHILE',
-}
-
 # List of tokens
 tokens = keywords + [
     'PHP_OPEN',
@@ -53,10 +45,9 @@ t_ignore_COMMENT =r'//.*'
 # Token definitions
 def t_KEYWORD(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.value = t.value.lower()  # Convert to lowercase
-    t.type = reserved.get(t.value, 'KEYWORD')  # Check against reserved keywords
+    if t.value.upper() in keywords:
+        t.type = t.value.upper()
     return t
-
 def t_VAR(t):
     r'\$[a-zA-Z_][a-zA-Z0-9_]*'  # Identifiers start with $ followed by letters or numbers
     t.value = t.value[1:]
