@@ -6,92 +6,84 @@ tokens = phplex.tokens
 # Precedence rules for the parser
 precedence = (
     ('left', 'PLUS'),
-    ('left', 'DIVIDE', 'MOD'),
-    ('left', 'CONCAT')
+    ('left', 'DIVIDE'),
 )
 
 # Grammar rules for the parser
 def p_program(p):
-    '''program : statements'''
-    p[0] = p[1]
+    '''program : PHP_OPEN statements PHP_CLOSE'''
+    p[0] = ('program', p[2])
 
 def p_statements(p):
-    '''statements : statements statement
-                  | statement'''
+    '''statements : statement statements
+                   | statement'''
     if len(p) == 3:
-        p[0] = p[1] + [p[2]]
+        p[0] = [p[1]] + p[2]
     else:
+        # If it's the last statement, it shouldn't require a semicolon
         p[0] = [p[1]]
 
 def p_statement_print(p):
-    'statement : PRINT STRING SEMI'
-    print(p[2].strip('"'))
+    '''statement : PRINT expression SEMI
+                 | PRINT expression'''
+    p[0] = ('print', p[2])
 
 def p_statement_echo(p):
-    'statement : ECHO STRING SEMI'
-    print(p[2].strip('"'))
+    '''statement : ECHO expression SEMI
+                 | ECHO expression'''
+    p[0] = ('echo', p[2])
 
 def p_statement_assign(p):
-    'statement : IDENTIFIER EQUALS expression SEMI'
-    p[0] = (p[1], p[3])  # Store variable assignment
+    '''statement : VAR EQUALS expression SEMI'''
+    var_name = p[1]  # Variable name without the '$'
+    value = p[3]  # The value being assigned
+    p[0] = ('assign', var_name, value)
+
+def p_statement_if_else(p):
+    '''statement : IF LPAREN expression RPAREN LCURLY statements RCURLY ELSE LCURLY statements RCURLY'''
+    p[0] = ('ifelse', p[3], p[6], p[10])
 
 def p_statement_while(p):
-    'statement : WHILE LPAREN condition RPAREN LCURLY statements RCURLY'
-    while eval_condition(p[3]):
-        p[0] = p[6]  # Execute the block
+    '''statement : WHILE LPAREN expression RPAREN LCURLY statements RCURLY'''
+    p[0] = ('while', p[3], p[6])
 
 def p_statement_if(p):
-    '''statement : IF LPAREN condition RPAREN LCURLY statements RCURLY
-                 | IF LPAREN condition RPAREN LCURLY statements RCURLY ELSE LCURLY statements RCURLY'''
-    if eval_condition(p[3]):
-        p[0] = p[6]  # Execute the if block
-    elif len(p) == 12:  # If there's an else block
-        p[0] = p[10]  # Execute the else block
-
-def p_condition(p):
-    '''condition : IDENTIFIER GREATERTHAN IDENTIFIER
-                 | IDENTIFIER LESSEQUAL IDENTIFIER
-                 | IDENTIFIER MOD NUMBER EQUALS NUMBER'''
-    p[0] = (p[1], p[2], p[3])  # Store the condition
+    '''statement : IF LPAREN expression RPAREN LCURLY statements RCURLY'''
+    p[0] = ('if', p[3], p[6])
 
 def p_expression_binop(p):
     '''expression : expression PLUS expression
                   | expression DIVIDE expression
                   | expression MOD expression
+                  | expression LESSEQUAL expression
+                  | expression GREATERTHAN expression
+                  | expression NOTEQUAL expression
                   | expression CONCAT expression'''
-    if p[2] == '+':
-        # p[0] = p[1] + p[3]
-        p[0] = str(p[1]) + str(p[3])
-    elif p[2] == '/':
-        p[0] = str(p[1]) / str(p[3])
-    elif p[2] == '%':
-        p[0] = str(p[1]) % str(p[3])
-    elif p[2] == '.':
-        p[0] = str(p[1]) + str(p[3])  # Concatenate two strings
-
-def p_expression_not(p):
-    'expression : NOT expression'
-    p[0] = not p[2]  # Logical NOT
+    p[0] = ('binop', p[2], p[1], p[3])
 
 def p_expression_group(p):
-    'expression : LPAREN expression RPAREN'
+    '''expression : LPAREN expression RPAREN'''
     p[0] = p[2]
 
 def p_expression_number(p):
-    'expression : NUMBER'
+    '''expression : NUMBER'''
     p[0] = p[1]
 
-def p_expression_identifier(p):
-    'expression : IDENTIFIER'
-    p[0] = p[1]  # Return the identifier
+def p_expression_id(p):
+    '''expression : IDENTIFIER
+                  | VAR'''
+    var_name = p[1][1:] if p[1].startswith('$') else p[1]  # Remove '$' from VAR tokens
+    p[0] = ('var', var_name)
 
-def p_statement_return(p):
-    'statement : RETURN expression SEMI'
-    return_value = p[2]
-    print(f"Return value: {return_value}")
+def p_expression_string(p):
+    '''expression : STRING'''
+    p[0] = ('string', p[1])
 
 def p_error(p):
-    print("Syntax error at '%s'" % p)
+    if p:
+        print(f"Syntax error at '{p.value}', line {p.lineno}")
+    else:
+        print("Syntax error at EOF")
 
 # Function to evaluate conditions
 def eval_condition(condition):
@@ -108,9 +100,3 @@ def eval_condition(condition):
 # Build the parser
 parser = yacc.yacc()
 
-def parse(data, debug=0):
-    parser.error = 0
-    p = parser.parse(data, debug=debug)
-    if parser.error:
-        return None
-    return p

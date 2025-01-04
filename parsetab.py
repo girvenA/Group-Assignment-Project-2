@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftPLUSleftDIVIDEMODleftCONCATCONCAT DIVIDE ECHO ELSE EQUALS GREATERTHAN IDENTIFIER IF LCURLY LESSEQUAL LPAREN MOD NOT NUMBER PLUS PRINT RCURLY RETURN RPAREN SEMI STRING WHILEprogram : statementsstatements : statements statement\n                  | statementstatement : PRINT STRING SEMIstatement : ECHO STRING SEMIstatement : IDENTIFIER EQUALS expression SEMIstatement : WHILE LPAREN condition RPAREN LCURLY statements RCURLYstatement : IF LPAREN condition RPAREN LCURLY statements RCURLY\n                 | IF LPAREN condition RPAREN LCURLY statements RCURLY ELSE LCURLY statements RCURLYcondition : IDENTIFIER GREATERTHAN IDENTIFIER\n                 | IDENTIFIER LESSEQUAL IDENTIFIER\n                 | IDENTIFIER MOD NUMBER EQUALS NUMBERexpression : expression PLUS expression\n                  | expression DIVIDE expression\n                  | expression MOD expression\n                  | expression CONCAT expressionexpression : NOT expressionexpression : LPAREN expression RPARENexpression : NUMBERexpression : IDENTIFIERstatement : RETURN expression SEMI'
+_lr_signature = 'leftPLUSleftDIVIDECONCAT DIVIDE ECHO ELSE EQUALS GREATERTHAN IDENTIFIER IF LCURLY LESSEQUAL LPAREN MOD NOTEQUAL NUMBER PHP_CLOSE PHP_OPEN PLUS PRINT RCURLY RPAREN SEMI STRING VAR WHILEprogram : PHP_OPEN statements PHP_CLOSEstatements : statement statements\n                   | statementstatement : PRINT expression SEMI\n                 | PRINT expressionstatement : ECHO expression SEMI\n                 | ECHO expressionstatement : VAR EQUALS expression SEMIstatement : IF LPAREN expression RPAREN LCURLY statements RCURLY ELSE LCURLY statements RCURLYstatement : WHILE LPAREN expression RPAREN LCURLY statements RCURLYstatement : IF LPAREN expression RPAREN LCURLY statements RCURLYexpression : expression PLUS expression\n                  | expression DIVIDE expression\n                  | expression MOD expression\n                  | expression LESSEQUAL expression\n                  | expression GREATERTHAN expression\n                  | expression NOTEQUAL expression\n                  | expression CONCAT expressionexpression : LPAREN expression RPARENexpression : NUMBERexpression : IDENTIFIER\n                  | VARexpression : STRING'
     
-_lr_action_items = {'PRINT':([0,2,3,10,21,22,27,34,45,49,50,52,53,55,57,58,59,],[4,4,-3,-2,-4,-5,-21,-6,4,4,4,4,-7,-8,4,4,-9,]),'ECHO':([0,2,3,10,21,22,27,34,45,49,50,52,53,55,57,58,59,],[5,5,-3,-2,-4,-5,-21,-6,5,5,5,5,-7,-8,5,5,-9,]),'IDENTIFIER':([0,2,3,9,10,13,14,15,17,18,21,22,27,28,29,30,31,34,36,37,45,49,50,52,53,55,57,58,59,],[6,6,-3,20,-2,20,25,25,20,20,-4,-5,-21,20,20,20,20,-6,46,47,6,6,6,6,-7,-8,6,6,-9,]),'WHILE':([0,2,3,10,21,22,27,34,45,49,50,52,53,55,57,58,59,],[7,7,-3,-2,-4,-5,-21,-6,7,7,7,7,-7,-8,7,7,-9,]),'IF':([0,2,3,10,21,22,27,34,45,49,50,52,53,55,57,58,59,],[8,8,-3,-2,-4,-5,-21,-6,8,8,8,8,-7,-8,8,8,-9,]),'RETURN':([0,2,3,10,21,22,27,34,45,49,50,52,53,55,57,58,59,],[9,9,-3,-2,-4,-5,-21,-6,9,9,9,9,-7,-8,9,9,-9,]),'$end':([1,2,3,10,21,22,27,34,53,55,59,],[0,-1,-3,-2,-4,-5,-21,-6,-7,-8,-9,]),'RCURLY':([3,10,21,22,27,34,50,52,53,55,58,59,],[-3,-2,-4,-5,-21,-6,53,55,-7,-8,59,-9,]),'STRING':([4,5,],[11,12,]),'EQUALS':([6,48,],[13,51,]),'LPAREN':([7,8,9,13,17,18,28,29,30,31,],[14,15,18,18,18,18,18,18,18,18,]),'NOT':([9,13,17,18,28,29,30,31,],[17,17,17,17,17,17,17,17,]),'NUMBER':([9,13,17,18,28,29,30,31,38,51,],[19,19,19,19,19,19,19,19,48,54,]),'SEMI':([11,12,16,19,20,23,32,40,41,42,43,44,],[21,22,27,-19,-20,34,-17,-13,-14,-15,-16,-18,]),'PLUS':([16,19,20,23,32,33,40,41,42,43,44,],[28,-19,-20,28,28,28,-13,-14,-15,-16,-18,]),'DIVIDE':([16,19,20,23,32,33,40,41,42,43,44,],[29,-19,-20,29,29,29,29,-14,-15,-16,-18,]),'MOD':([16,19,20,23,25,32,33,40,41,42,43,44,],[30,-19,-20,30,38,30,30,30,-14,-15,-16,-18,]),'CONCAT':([16,19,20,23,32,33,40,41,42,43,44,],[31,-19,-20,31,31,31,31,31,31,-16,-18,]),'RPAREN':([19,20,24,26,32,33,40,41,42,43,44,46,47,54,],[-19,-20,35,39,-17,44,-13,-14,-15,-16,-18,-10,-11,-12,]),'GREATERTHAN':([25,],[36,]),'LESSEQUAL':([25,],[37,]),'LCURLY':([35,39,56,],[45,49,57,]),'ELSE':([55,],[56,]),}
+_lr_action_items = {'PHP_OPEN':([0,],[2,]),'$end':([1,10,],[0,-1,]),'PRINT':([2,4,12,14,15,16,17,18,22,31,35,36,37,38,39,40,41,42,43,46,47,50,51,53,55,],[5,5,-5,-20,-21,-22,-23,-7,-4,-6,-12,-13,-14,-15,-16,-17,-18,-19,-8,5,5,-11,-10,5,-9,]),'ECHO':([2,4,12,14,15,16,17,18,22,31,35,36,37,38,39,40,41,42,43,46,47,50,51,53,55,],[6,6,-5,-20,-21,-22,-23,-7,-4,-6,-12,-13,-14,-15,-16,-17,-18,-19,-8,6,6,-11,-10,6,-9,]),'VAR':([2,4,5,6,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,31,35,36,37,38,39,40,41,42,43,46,47,50,51,53,55,],[7,7,16,16,-5,16,-20,-21,-22,-23,-7,16,16,16,-4,16,16,16,16,16,16,16,-6,-12,-13,-14,-15,-16,-17,-18,-19,-8,7,7,-11,-10,7,-9,]),'IF':([2,4,12,14,15,16,17,18,22,31,35,36,37,38,39,40,41,42,43,46,47,50,51,53,55,],[8,8,-5,-20,-21,-22,-23,-7,-4,-6,-12,-13,-14,-15,-16,-17,-18,-19,-8,8,8,-11,-10,8,-9,]),'WHILE':([2,4,12,14,15,16,17,18,22,31,35,36,37,38,39,40,41,42,43,46,47,50,51,53,55,],[9,9,-5,-20,-21,-22,-23,-7,-4,-6,-12,-13,-14,-15,-16,-17,-18,-19,-8,9,9,-11,-10,9,-9,]),'PHP_CLOSE':([3,4,11,12,14,15,16,17,18,22,31,35,36,37,38,39,40,41,42,43,50,51,55,],[10,-3,-2,-5,-20,-21,-22,-23,-7,-4,-6,-12,-13,-14,-15,-16,-17,-18,-19,-8,-11,-10,-9,]),'RCURLY':([4,11,12,14,15,16,17,18,22,31,35,36,37,38,39,40,41,42,43,48,49,50,51,54,55,],[-3,-2,-5,-20,-21,-22,-23,-7,-4,-6,-12,-13,-14,-15,-16,-17,-18,-19,-8,50,51,-11,-10,55,-9,]),'LPAREN':([5,6,8,9,13,19,20,21,23,24,25,26,27,28,29,],[13,13,20,21,13,13,13,13,13,13,13,13,13,13,13,]),'NUMBER':([5,6,13,19,20,21,23,24,25,26,27,28,29,],[14,14,14,14,14,14,14,14,14,14,14,14,14,]),'IDENTIFIER':([5,6,13,19,20,21,23,24,25,26,27,28,29,],[15,15,15,15,15,15,15,15,15,15,15,15,15,]),'STRING':([5,6,13,19,20,21,23,24,25,26,27,28,29,],[17,17,17,17,17,17,17,17,17,17,17,17,17,]),'EQUALS':([7,],[19,]),'SEMI':([12,14,15,16,17,18,32,35,36,37,38,39,40,41,42,],[22,-20,-21,-22,-23,31,43,-12,-13,-14,-15,-16,-17,-18,-19,]),'PLUS':([12,14,15,16,17,18,30,32,33,34,35,36,37,38,39,40,41,42,],[23,-20,-21,-22,-23,23,23,23,23,23,-12,-13,23,23,23,23,23,-19,]),'DIVIDE':([12,14,15,16,17,18,30,32,33,34,35,36,37,38,39,40,41,42,],[24,-20,-21,-22,-23,24,24,24,24,24,24,-13,24,24,24,24,24,-19,]),'MOD':([12,14,15,16,17,18,30,32,33,34,35,36,37,38,39,40,41,42,],[25,-20,-21,-22,-23,25,25,25,25,25,-12,-13,25,25,25,25,25,-19,]),'LESSEQUAL':([12,14,15,16,17,18,30,32,33,34,35,36,37,38,39,40,41,42,],[26,-20,-21,-22,-23,26,26,26,26,26,-12,-13,26,26,26,26,26,-19,]),'GREATERTHAN':([12,14,15,16,17,18,30,32,33,34,35,36,37,38,39,40,41,42,],[27,-20,-21,-22,-23,27,27,27,27,27,-12,-13,27,27,27,27,27,-19,]),'NOTEQUAL':([12,14,15,16,17,18,30,32,33,34,35,36,37,38,39,40,41,42,],[28,-20,-21,-22,-23,28,28,28,28,28,-12,-13,28,28,28,28,28,-19,]),'CONCAT':([12,14,15,16,17,18,30,32,33,34,35,36,37,38,39,40,41,42,],[29,-20,-21,-22,-23,29,29,29,29,29,-12,-13,29,29,29,29,29,-19,]),'RPAREN':([14,15,16,17,30,33,34,35,36,37,38,39,40,41,42,],[-20,-21,-22,-23,42,44,45,-12,-13,-14,-15,-16,-17,-18,-19,]),'LCURLY':([44,45,52,],[46,47,53,]),'ELSE':([50,],[52,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'statements':([0,45,49,57,],[2,50,52,58,]),'statement':([0,2,45,49,50,52,57,58,],[3,10,3,3,10,10,3,10,]),'expression':([9,13,17,18,28,29,30,31,],[16,23,32,33,40,41,42,43,]),'condition':([14,15,],[24,26,]),}
+_lr_goto_items = {'program':([0,],[1,]),'statements':([2,4,46,47,53,],[3,11,48,49,54,]),'statement':([2,4,46,47,53,],[4,4,4,4,4,]),'expression':([5,6,13,19,20,21,23,24,25,26,27,28,29,],[12,18,30,32,33,34,35,36,37,38,39,40,41,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,25 +27,27 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> statements','program',1,'p_program','phpparser.py',15),
-  ('statements -> statements statement','statements',2,'p_statements','phpparser.py',19),
-  ('statements -> statement','statements',1,'p_statements','phpparser.py',20),
-  ('statement -> PRINT STRING SEMI','statement',3,'p_statement_print','phpparser.py',27),
-  ('statement -> ECHO STRING SEMI','statement',3,'p_statement_echo','phpparser.py',31),
-  ('statement -> IDENTIFIER EQUALS expression SEMI','statement',4,'p_statement_assign','phpparser.py',35),
-  ('statement -> WHILE LPAREN condition RPAREN LCURLY statements RCURLY','statement',7,'p_statement_while','phpparser.py',39),
-  ('statement -> IF LPAREN condition RPAREN LCURLY statements RCURLY','statement',7,'p_statement_if','phpparser.py',44),
-  ('statement -> IF LPAREN condition RPAREN LCURLY statements RCURLY ELSE LCURLY statements RCURLY','statement',11,'p_statement_if','phpparser.py',45),
-  ('condition -> IDENTIFIER GREATERTHAN IDENTIFIER','condition',3,'p_condition','phpparser.py',52),
-  ('condition -> IDENTIFIER LESSEQUAL IDENTIFIER','condition',3,'p_condition','phpparser.py',53),
-  ('condition -> IDENTIFIER MOD NUMBER EQUALS NUMBER','condition',5,'p_condition','phpparser.py',54),
-  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','phpparser.py',58),
-  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','phpparser.py',59),
-  ('expression -> expression MOD expression','expression',3,'p_expression_binop','phpparser.py',60),
+  ('program -> PHP_OPEN statements PHP_CLOSE','program',3,'p_program','phpparser.py',14),
+  ('statements -> statement statements','statements',2,'p_statements','phpparser.py',18),
+  ('statements -> statement','statements',1,'p_statements','phpparser.py',19),
+  ('statement -> PRINT expression SEMI','statement',3,'p_statement_print','phpparser.py',27),
+  ('statement -> PRINT expression','statement',2,'p_statement_print','phpparser.py',28),
+  ('statement -> ECHO expression SEMI','statement',3,'p_statement_echo','phpparser.py',32),
+  ('statement -> ECHO expression','statement',2,'p_statement_echo','phpparser.py',33),
+  ('statement -> VAR EQUALS expression SEMI','statement',4,'p_statement_assign','phpparser.py',37),
+  ('statement -> IF LPAREN expression RPAREN LCURLY statements RCURLY ELSE LCURLY statements RCURLY','statement',11,'p_statement_if_else','phpparser.py',43),
+  ('statement -> WHILE LPAREN expression RPAREN LCURLY statements RCURLY','statement',7,'p_statement_while','phpparser.py',47),
+  ('statement -> IF LPAREN expression RPAREN LCURLY statements RCURLY','statement',7,'p_statement_if','phpparser.py',51),
+  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','phpparser.py',55),
+  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','phpparser.py',56),
+  ('expression -> expression MOD expression','expression',3,'p_expression_binop','phpparser.py',57),
+  ('expression -> expression LESSEQUAL expression','expression',3,'p_expression_binop','phpparser.py',58),
+  ('expression -> expression GREATERTHAN expression','expression',3,'p_expression_binop','phpparser.py',59),
+  ('expression -> expression NOTEQUAL expression','expression',3,'p_expression_binop','phpparser.py',60),
   ('expression -> expression CONCAT expression','expression',3,'p_expression_binop','phpparser.py',61),
-  ('expression -> NOT expression','expression',2,'p_expression_not','phpparser.py',72),
-  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','phpparser.py',76),
-  ('expression -> NUMBER','expression',1,'p_expression_number','phpparser.py',80),
-  ('expression -> IDENTIFIER','expression',1,'p_expression_identifier','phpparser.py',84),
-  ('statement -> RETURN expression SEMI','statement',3,'p_statement_return','phpparser.py',88),
+  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','phpparser.py',65),
+  ('expression -> NUMBER','expression',1,'p_expression_number','phpparser.py',69),
+  ('expression -> IDENTIFIER','expression',1,'p_expression_id','phpparser.py',73),
+  ('expression -> VAR','expression',1,'p_expression_id','phpparser.py',74),
+  ('expression -> STRING','expression',1,'p_expression_string','phpparser.py',79),
 ]
